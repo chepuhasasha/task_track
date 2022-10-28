@@ -3,7 +3,8 @@
   .tasksArea_head
     HTag(tag="h2") {{ title }}
     span {{ tasks.length }}
-  Task(v-for="task in tasks", :key="task.id", :task="task")
+  TransitionGroup.tasksArea_body(name="list" tag="div")
+    Task(v-for="task in tasks", :key="task.id", :task="task")
 </template>
 <script setup lang="ts">
 import type { ITask } from "@/dto/task.interface";
@@ -22,6 +23,7 @@ const store = useTaskStore();
 const onDrop = (e: DragEvent) => {
   if (props.status && e.dataTransfer) {
     store.updateStatus(props.status, e.dataTransfer.getData("id"));
+    store.select(null)
   }
 };
 </script>
@@ -47,4 +49,23 @@ const onDrop = (e: DragEvent) => {
     span
       font: var(--font-200)
       color: var(--text-color-300)
+  &_body
+    position: relative
+    display: flex
+    flex-direction: column
+    gap: 10px
+
+.list-move,
+.list-enter-active,
+.list-leave-active
+  transition: all 0.5s ease
+
+.list-enter-from,
+.list-leave-to
+  opacity: 0
+  transform: translateX(30px)
+
+.list-leave-active
+  position: absolute
+  width: 100%
 </style>

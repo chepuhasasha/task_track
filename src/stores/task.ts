@@ -2,8 +2,14 @@ import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import type { ITask } from "@/dto/task.interface";
 
+interface ITaskState {
+  selectedID: string | null;
+  tasks: ITask[];
+}
+
 export const useTaskStore = defineStore("tasks", {
-  state: () => ({
+  state: (): ITaskState => ({
+    selectedID: null,
     tasks: [
       {
         id: "09213092109",
@@ -42,6 +48,9 @@ export const useTaskStore = defineStore("tasks", {
       if (task) {
         task.status = status;
       }
+    },
+    select(id: string | null) {
+      this.selectedID = id;
     },
   },
 });

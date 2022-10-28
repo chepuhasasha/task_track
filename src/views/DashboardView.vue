@@ -35,7 +35,7 @@ const ready = computed(() =>
 .dashboard
   display: grid
   grid-template-rows: max-content 1fr
-  grid-template-columns: repeat(3, 1fr) 300px
+  grid-template-columns: repeat(3, 1fr)
   gap: 10px
   padding: 10px
   width: 100%
