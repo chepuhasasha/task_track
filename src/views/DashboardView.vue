@@ -3,19 +3,33 @@
 .dashboard
   .dashboard_head
     HTag Tasks
-  TasksArea(v-area="'2/1/3/2'", status="todo", :tasks="tasks" title='TO DO')
-  TasksArea(v-area="'2/2/3/3'", status="inwork" title='IN WORK')
-  TasksArea(v-area="'2/3/3/4'", status="ready" title='READY')
+  TasksArea(v-area="'2/1/3/2'", status="todo", title="TO DO", :tasks="todo")
+  TasksArea(
+    v-area="'2/2/3/3'",
+    status="inwork",
+    title="IN WORK",
+    :tasks="inwork"
+  )
+  TasksArea(v-area="'2/3/3/4'", status="ready", title="READY", :tasks="ready")
 </template>
 
 <script setup lang="ts">
+import { useTaskStore } from "@/stores/task";
 import TasksArea from "@/components/blocks/TasksArea.vue";
-import data from "@/data/testdata.json";
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import type { ITask } from "@/dto/task.interface";
 
-const tasks = computed(() => {
-  return data;
-});
+const store = useTaskStore();
+
+const todo = computed(() =>
+  store.getTasks.filter((task) => task.status === "todo")
+);
+const inwork = computed(() =>
+  store.getTasks.filter((task) => task.status === "inwork")
+);
+const ready = computed(() =>
+  store.getTasks.filter((task) => task.status === "ready")
+);
 </script>
 <style lang="sass">
 .dashboard
@@ -32,4 +46,6 @@ const tasks = computed(() => {
   &_head
     padding: 20px
     grid-area: 1 / 1 / 2 / 4
+  pre
+    color: white
 </style>
