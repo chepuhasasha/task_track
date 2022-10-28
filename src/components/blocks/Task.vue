@@ -35,7 +35,7 @@ const dragStart = (e: DragEvent, item: ITask) => {
   background: var(--contrast-200)
   border-radius: 10px
   padding: 10px
-  cursor: pointer
+  cursor: move
   border: var(--border-100)
   &__selected
     background: var(--contrast-100)
