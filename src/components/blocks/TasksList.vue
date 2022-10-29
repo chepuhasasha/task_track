@@ -15,8 +15,6 @@ import Task from "@/components/blocks/Task.vue";
 
 const search = ref<string | null>(null);
 const props = defineProps({
-  title: { type: String as PropType<string>, default: "TO DO" },
-  status: { type: String as PropType<ITask["status"]> },
   tasks: { type: Array as PropType<ITask[]>, default: () => [] },
 });
 
