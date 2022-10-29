@@ -4,7 +4,9 @@
   draggable="true"
   :class='{task__selected: store.selectedID === task.id}'
 )
-  HTag(tag="h3") {{ task.title }}
+  .task_head
+    HTag(tag="h3") {{ task.title }}
+    StatusWidget(:status='task.status')
   PTag {{ task.description }}
 </template>
 <script setup lang="ts">
@@ -37,6 +39,10 @@ const dragStart = (e: DragEvent, item: ITask) => {
   padding: 10px
   cursor: move
   border: var(--border-100)
+  &_head
+    display: flex
+    justify-content: space-between
+    align-items: center
   &__selected
     background: var(--contrast-100)
 </style>
