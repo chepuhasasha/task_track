@@ -11,11 +11,13 @@
     :tasks="inwork"
   )
   TasksArea(v-area="'2/3/3/4'", status="ready", title="READY", :tasks="ready")
+  TasksList(v-area="'2/4/3/5'", :tasks="store.getTasks")
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from "@/stores/task";
 import TasksArea from "@/components/blocks/TasksArea.vue";
+import TasksList from "@/components/blocks/TasksList.vue";
 import { computed, ref } from "vue";
 import type { ITask } from "@/dto/task.interface";
 
@@ -35,7 +37,7 @@ const ready = computed(() =>
 .dashboard
   display: grid
   grid-template-rows: max-content 1fr
-  grid-template-columns: repeat(3, 1fr)
+  grid-template-columns: repeat(3, 1fr) 300px
   gap: 10px
   padding: 10px
   width: 100%
